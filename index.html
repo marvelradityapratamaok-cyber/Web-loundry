@@ -253,8 +253,8 @@
             <h2 class="text-2xl font-bold text-slate-900 text-center">Laundry-In</h2>
             <p class="text-sm text-slate-500 text-center mb-6">Sistem Validasi Karyawan & Pemilik</p>
             <div class="form-group">
-                <label>Alamat Gmail Resmi</label>
-                <input type="email" id="gate-email" placeholder="nama@gmail.com">
+                <label>Nama Pengguna (Bebas)</label>
+                <input type="text" id="gate-username" placeholder="Masukkan nama Anda...">
             </div>
             <div class="form-group">
                 <label>Password Akun</label>
@@ -315,13 +315,12 @@
                 </div>
 
                 <div class="table-section bg-orange-50 border-l-4 border-orange-500">
-                    <h3 class="font-bold text-orange-700">Status Karyawan Aktif Toko</h3>
+                    <h3 class="font-bold text-orange-700">Status Sesi Aktif Toko</h3>
                     <div class="table-responsive">
                         <table>
                             <thead>
                                 <tr class="bg-orange-100">
                                     <th>Nama Aktif</th>
-                                    <th>Email Sesi</th>
                                     <th>Tingkat Akses</th>
                                     <th>Otoritas Tindakan</th>
                                 </tr>
@@ -479,17 +478,6 @@
     </div>
 
     <script>
-        const VALID_USERS = {
-            owner: [
-                { email: "owner.laundry@gmail.com", password: "ownersecret123", namaReal: "Boss Budi (Owner)" },
-                { email: "mangambelaundry@gmail.com", password: "bekasibersinar", namaReal: "Mangambe Pemilik (Owner)" }
-            ],
-            admin: [
-                { email: "siti.laundry@gmail.com", password: "siti456", namaReal: "Siti Rahma (Admin)" },
-                { email: "kasir.mangambe@gmail.com", password: "laundry24jam", namaReal: "Staf Kasir (Admin)" }
-            ]
-        };
-
         // SEEDER DATA JIKA LOCALSTORAGE MASIH KOSONG BIAR GRAFIK LANGSUNG MUNCUL WARNA DI AWAL
         if(!localStorage.getItem('laundry_orders') || JSON.parse(localStorage.getItem('laundry_orders')).length === 0) {
             const mockNow = new Date();
@@ -514,7 +502,6 @@
         let nextOrderNumber = parseInt(localStorage.getItem('laundry_next_number')) || 1;
 
         let currentRole = localStorage.getItem('laundry_role') || "belum_login"; 
-        let activeUserEmail = localStorage.getItem('laundry_email') || "";
         let activeUserRealName = localStorage.getItem('laundry_name') || ""; 
         let lineChart, pieChart; 
         let activeFilter = "perjam"; 
@@ -526,7 +513,6 @@
             localStorage.setItem('laundry_delete_expense_logs', JSON.stringify(deleteExpenseLogs));
             localStorage.setItem('laundry_next_number', nextOrderNumber);
             localStorage.setItem('laundry_role', currentRole);
-            localStorage.setItem('laundry_email', activeUserEmail);
             localStorage.setItem('laundry_name', activeUserRealName);
         }
 
@@ -571,16 +557,27 @@
         function tutupPintuLogin() { document.getElementById('login-gate').classList.remove('flex'); document.getElementById('login-gate').classList.add('hidden'); }
 
         function checkGateLogin() {
-            const emailInput = document.getElementById('gate-email').value.trim();
+            const userInput = document.getElementById('gate-username').value.trim();
             const passInput = document.getElementById('gate-password').value;
-            if(!emailInput || !passInput) return alert("Mohon isi Email dan Password!");
+            if(!userInput || !passInput) return alert("Mohon isi Nama Pengguna dan Password!");
 
-            let foundUser = VALID_USERS.owner.find(u => u.email.toLowerCase() === emailInput.toLowerCase() && u.password === passInput);
-            if(foundUser) { currentRole = "owner"; activeUserEmail = foundUser.email; activeUserRealName = foundUser.namaReal; mainkanSuaraSukses(); saveData(); openDashboardSystem(true); return; }
-
-            foundUser = VALID_USERS.admin.find(u => u.email.toLowerCase() === emailInput.toLowerCase() && u.password === passInput);
-            if(foundUser) { currentRole = "admin"; activeUserEmail = foundUser.email; activeUserRealName = foundUser.namaReal; mainkanSuaraSukses(); saveData(); openDashboardSystem(true); return; }
-            alert("Gagal! Email atau Password salah.");
+            if(passInput === "owner2026") {
+                currentRole = "owner";
+                activeUserRealName = userInput + " (Owner)";
+                mainkanSuaraSukses();
+                saveData();
+                openDashboardSystem(true);
+                return;
+            } else if(passInput === "admin2026") {
+                currentRole = "admin";
+                activeUserRealName = userInput + " (Admin)";
+                mainkanSuaraSukses();
+                saveData();
+                openDashboardSystem(true);
+                return;
+            }
+            
+            alert("Gagal! Password salah.");
         }
 
         function openDashboardSystem(pakeAnimasi = false) {
@@ -613,15 +610,17 @@
         }
 
         function executeLogout() {
-            currentRole = "belum_login"; activeUserEmail = ""; activeUserRealName = ""; saveData();
-            document.getElementById('gate-email').value = ""; document.getElementById('gate-password').value = "";
+            currentRole = "belum_login"; activeUserRealName = ""; saveData();
+            document.getElementById('gate-username').value = ""; document.getElementById('gate-password').value = "";
             document.getElementById('admin-workspace').className = "hidden";
             document.getElementById('public-page').className = "block";
         }
 
         function kickStafPaksa() {
             if(currentRole !== 'owner') return;
-            if(confirm("Gunakan otoritas Owner untuk mengeluarkan sesi Admin paksa?")) { alert("Sesi Admin berhasil dikeluarkan."); executeLogout(); }
+            if(confirm("Gunakan otoritas Owner untuk mengeluarkan sesi Admin paksa?")) { 
+                alert("Sesi Admin berhasil dikeluarkan."); 
+            }
         }
 
         function switchPage(pageId, element) {
@@ -665,12 +664,27 @@
 
         function renderSesiAktifPanel() {
             const tabelSesi = document.getElementById('tabel-sesi-aktif'); if(!tabelSesi) return;
-            tabelSesi.innerHTML = `<tr>
-                <td><strong>Siti Rahma</strong></td>
-                <td>siti.laundry@gmail.com</td>
-                <td><span style="color:#d97706; font-weight:bold;">Admin Sesi</span></td>
-                <td>${currentRole === 'owner' ? `<button class="btn-kick" onclick="kickStafPaksa()">Kick / Log Out Paksa</button>` : `<button class="btn-kick" disabled style="background:#cbd5e1; color:#94a3b8; cursor:not-allowed;">No Access</button>`}</td>
-            </tr>`;
+            
+            if(currentRole === 'owner') {
+                tabelSesi.innerHTML = `
+                <tr>
+                    <td><strong>${activeUserRealName}</strong></td>
+                    <td><span style="color:#22c55e; font-weight:bold;">Owner Sesi</span></td>
+                    <td><button class="btn-kick" disabled style="background:#cbd5e1; color:#94a3b8; cursor:not-allowed;">Cannot Kick Self</button></td>
+                </tr>
+                <tr>
+                    <td><strong>Staf Kasir</strong></td>
+                    <td><span style="color:#d97706; font-weight:bold;">Admin Kontrol</span></td>
+                    <td><button class="btn-kick" onclick="kickStafPaksa()">Kick / Log Out Paksa</button></td>
+                </tr>`;
+            } else {
+                tabelSesi.innerHTML = `
+                <tr>
+                    <td><strong>${activeUserRealName}</strong></td>
+                    <td><span style="color:#d97706; font-weight:bold;">Admin Sesi</span></td>
+                    <td><button class="btn-kick" onclick="executeLogout()">Kick / Log Out Diri Sendiri</button></td>
+                </tr>`;
+            }
         }
 
         function renderDeleteLogs() {
@@ -802,7 +816,6 @@
             updateChartsData();
         }
 
-        /* LOGIK GENERATOR WARNA DINAMIS 100% AKURAT: TURUN MERAH, NAIK IJO, STABIL KUNING */
         function updateChartsData() {
             if(!lineChart || !pieChart || currentRole === "belum_login") return;
             
@@ -851,8 +864,7 @@
                 }
             }
 
-            // ATURAN WARNA ADAPTIF BERDASARKAN TREN DATA TERAKHIR
-            let borderCol = '#f59e0b'; // Default Kuning (Stabil)
+            let borderCol = '#f59e0b'; 
             let bgCol = 'rgba(245, 158, 11, 0.05)';
             
             if(datasetData.length >= 2) {
@@ -860,10 +872,10 @@
                 let sebelumUjung = datasetData[datasetData.length - 2];
                 
                 if (ujungSekarang > sebelumUjung) {
-                    borderCol = '#10b981'; // Naik = Hijau
+                    borderCol = '#10b981'; 
                     bgCol = 'rgba(16, 185, 129, 0.08)';
                 } else if (ujungSekarang < sebelumUjung) {
-                    borderCol = '#ef4444'; // Turun = Merah
+                    borderCol = '#ef4444'; 
                     bgCol = 'rgba(239, 68, 68, 0.08)';
                 }
             }
@@ -890,7 +902,7 @@
             return pendapatan - pengeluaran;
         }
 
-        window.onload = function() { if (currentRole !== "belum_login" && activeUserEmail !== "") { openDashboardSystem(false); } };
+        window.onload = function() { if (currentRole !== "belum_login" && activeUserRealName !== "") { openDashboardSystem(false); } };
     </script>
 </body>
 </html>
