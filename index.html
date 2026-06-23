@@ -288,7 +288,12 @@
             <div id="dashboard" class="dashboard-section active">
                 <div class="flex justify-between items-center flex-wrap gap-2 mb-4">
                     <h1 class="text-2xl font-bold text-slate-900">Ringkasan Hari Ini</h1>
-                    <button class="btn-danger-outline" id="btn-reset-db" onclick="executeSystemReset()">Reset Database</button>
+                    <div class="flex gap-2">
+                        <button class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs md:text-sm font-bold px-4 py-2 rounded-xl shadow transition" onclick="kirimRekapanWhatsApp()">
+                            📲 Kirim Rekap Ke WA Owner
+                        </button>
+                        <button class="btn-danger-outline text-xs md:text-sm" id="btn-reset-db" onclick="executeSystemReset()">Reset Database</button>
+                    </div>
                 </div>
                 
                 <div class="stats-grid">
@@ -405,12 +410,25 @@
                     </div>
                     <div class="form-group">
                         <label>Pilih Layanan</label>
-                        <select id="input-layanan" onchange="hitungKalkulator()">
+                        <select id="input-layanan" onchange="toggleCustomLayananField(); hitungKalkulator();">
                             <option value="7000">Cuci Setrika Reguler (Rp 7.000/kg)</option>
                             <option value="15000">Express 6 Jam (Rp 15.000/kg)</option>
                             <option value="35000">Deep Clean Sepatu (Rp 35.000/pasang)</option>
+                            <option value="custom">-- Layanan Custom (Isi Sendiri) --</option>
                         </select>
                     </div>
+                    
+                    <div id="custom-layanan-wrapper" class="hidden bg-blue-50 p-4 rounded-xl mb-4 border border-blue-200">
+                        <div class="form-group">
+                            <label class="text-blue-800">Nama Layanan Custom</label>
+                            <input type="text" id="input-custom-nama" placeholder="Contoh: Cuci Karpet Jumbo">
+                        </div>
+                        <div class="form-group mb-0">
+                            <label class="text-blue-800">Harga Per Kg / Pcs (Rp)</label>
+                            <input type="number" id="input-custom-harga" placeholder="Contoh: 25000" oninput="hitungKalkulator()">
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label>Berat (Kg) / Jumlah (Pcs)</label>
                         <input type="number" id="input-berat" placeholder="Masukkan angka..." oninput="hitungKalkulator()">
@@ -628,13 +646,26 @@
             document.getElementById(pageId).classList.add('active');
             document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
             if(element) element.classList.add('active');
-            if(pageId === 'pesanan') document.getElementById('next-paper-number').innerText = "#" + nextOrderNumber;
+            if(pageId === 'pesanan') {
+                document.getElementById('next-paper-number').innerText = "#" + nextOrderNumber;
+                toggleCustomLayananField();
+            }
         }
 
         function triggerMobileTab(pageId, indexMenu) {
             const menuItems = document.querySelectorAll('.sidebar menu li');
             switchPage(pageId, menuItems.length > 0 ? menuItems[indexMenu] : null);
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleCustomLayananField() {
+            const selectLayanan = document.getElementById('input-layanan').value;
+            const customWrapper = document.getElementById('custom-layanan-wrapper');
+            if(selectLayanan === 'custom') {
+                customWrapper.classList.remove('hidden');
+            } else {
+                customWrapper.classList.add('hidden');
+            }
         }
 
         function renderTable() {
@@ -705,8 +736,15 @@
             const nama = document.getElementById('input-nama').value;
             const phone = document.getElementById('input-phone').value;
             const layananSelect = document.getElementById('input-layanan');
-            const layananNama = layananSelect.options[layananSelect.selectedIndex].text.split(' (')[0];
             const berat = document.getElementById('input-berat').value;
+            
+            let layananNama = "";
+            if(layananSelect.value === 'custom') {
+                layananNama = document.getElementById('input-custom-nama').value.trim();
+                if(!layananNama) return alert("Silakan isi nama layanan kustom Anda!");
+            } else {
+                layananNama = layananSelect.options[layananSelect.selectedIndex].text.split(' (')[0];
+            }
 
             if (!nama || !phone || !berat || berat <= 0) return alert("Mohon lengkapi data!");
             const totalHarga = hitungKalkulator();
@@ -746,6 +784,35 @@
             if(confirm("Hapus semua database?")) { orders = []; nextOrderNumber = 1; deleteLogs = []; expenses = []; deleteExpenseLogs = []; saveData(); renderTable(); renderExpensesTable(); }
         }
 
+        // FUNGSI PEREKAPAN otomatis KE WHATSAPP PEMILIK
+        function kirimRekapanWhatsApp() {
+            let belum = orders.filter(o => o.status === 'belum').length;
+            let proses = orders.filter(o => o.status === 'proses').length;
+            let selesai = orders.filter(o => o.status === 'selesai').length;
+            
+            let omzetKotor = orders.filter(o => o.status === 'proses' || o.status === 'selesai').reduce((sum, o) => sum + o.total, 0);
+            let totalPengeluaran = expenses.reduce((sum, e) => sum + e.cost, 0);
+            let omzetBersih = omzetKotor - totalPengeluaran;
+
+            let tanggalSore = new Date().toLocaleString('id-ID', { dateStyle: 'long', timeStyle: 'short' });
+
+            let teksRekap = `📊 *LAPORAN REKAP TOKO MANGAMBE LAUNDRY*\n`;
+            teksRekap += `📅 _Waktu Rekap: ${tanggalSore}_\n`;
+            teksRekap += `👤 _Dilaporkan oleh: ${activeUserRealName}_\n\n`;
+            teksRekap += `💵 *RINGKASAN KEUANGAN:*\n`;
+            teksRekap += `• Total Omzet Masuk: Rp ${omzetKotor.toLocaleString('id-ID')}\n`;
+            teksRekap += `• Total Pengeluaran: Rp ${totalPengeluaran.toLocaleString('id-ID')}\n`;
+            teksRekap += `• *KEUNTUNGAN BERSIH RIIL: Rp ${omzetBersih.toLocaleString('id-ID')}*\n\n`;
+            teksRekap += `🧺 *STATUS ANTREAN CUCIAN:*\n`;
+            teksRekap += `🔴 Belum Dicuci: ${belum} Order\n`;
+            teksRekap += `🟡 Sedang Diproses: ${proses} Order\n`;
+            teksRekap += `🟢 Siap Diambil: ${selesai} Order\n\n`;
+            teksRekap += `📱 _Sistem Auto-Rekap v2.0 - Sukses_`;
+
+            let urlWA = `https://api.whatsapp.com/send?phone=6281945497854&text=${encodeURIComponent(teksRekap)}`;
+            window.open(urlWA, '_blank');
+        }
+
         function rotasiStatus(index) {
             orders[index].status = orders[index].status === 'belum' ? 'proses' : (orders[index].status === 'proses' ? 'selesai' : 'belum');
             saveData(); renderTable();
@@ -776,15 +843,29 @@
         }
 
         function hitungKalkulator() {
-            let tarif = document.getElementById('input-layanan').value;
+            let selectLayanan = document.getElementById('input-layanan').value;
+            let tarif = 0;
+            
+            if(selectLayanan === 'custom') {
+                tarif = parseInt(document.getElementById('input-custom-harga').value) || 0;
+            } else {
+                tarif = parseInt(selectLayanan) || 0;
+            }
+
             let berat = document.getElementById('input-berat').value;
-            let total = (berat && berat > 0) ? parseInt(tarif) * parseFloat(berat) : 0;
+            let total = (berat && berat > 0) ? tarif * parseFloat(berat) : 0;
             document.getElementById('live-total').innerText = "Rp " + total.toLocaleString('id-ID');
             return total;
         }
 
         function resetForm() {
-            document.getElementById('input-nama').value = ""; document.getElementById('input-phone').value = ""; document.getElementById('input-berat').value = "";
+            document.getElementById('input-nama').value = ""; 
+            document.getElementById('input-phone').value = ""; 
+            document.getElementById('input-berat').value = "";
+            document.getElementById('input-custom-nama').value = "";
+            document.getElementById('input-custom-harga').value = "";
+            document.getElementById('input-layanan').value = "7000";
+            toggleCustomLayananField();
             document.getElementById('live-total').innerText = "Rp 0";
         }
 
