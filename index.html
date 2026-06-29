@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Laundry</title>
     <link rel="icon" href="logo.jpeg">
+      <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    
     
     <style>
         html {
@@ -327,16 +329,17 @@
                         Gak perlu keluar rumah. Admin Laundry siap melayani cuci kiloan, bed cover, karpet, boneka, hingga sepatu & bahan kulit kapan saja Anda butuhkan. Ditangani oleh tim ahli serta mesin andalan modern.
                     </p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                        <a href="https://web.whatsapp.com/" target="_blank" class="bg-emerald-500 text-white text-center px-8 py-3.5 rounded-xl font-bold hover:bg-emerald-600 transition shadow-lg flex items-center justify-center gap-2">
+                        <a href="https://web.whatsapp.com/" target="_blank" class="bg-emerald-500 text-white text-center px-8 py-3.5 rounded-xl font-bold hover:bg-emerald-600 transition shadow-lg flex items-center justify-center gap-2" data-aos="zoom-in-up" data-aos-duration="1000">
                             Pesan via WhatsApp
                         </a>
-                        <a href="#layanan-section" class="bg-blue-600 text-white text-center px-6 py-3.5 rounded-xl font-bold hover:bg-blue-700 transition shadow-md flex items-center justify-center">
+                        <a href="#layanan-section" class="bg-blue-600 text-white text-center px-6 py-3.5 rounded-xl font-bold hover:bg-blue-700 transition shadow-md flex items-center justify-center" data-aos="zoom-in-up" data-aos-duration="1100">
                             Lihat Menu Harga
                         </a>
                     </div>
                 </div>
             </section>
-            <div><h1 style="font-size: 25px; text-align: center;"><b>Sudah selesai belum ya?</b></h1></div>
+            <div><h1 style="font-size: 25px; text-align: center;"><b> <marquee behavior="scroll" direction="right" >Sudah selesai belum ya? </marquee>  </b></h1></div>
+       <div><h1 style="font-size: 25px; text-align: center;"><b> <marquee>Sudah selesai belum ya? </marquee>  </b></h1></div>
         </div>
 
         <div class="parallax-layer z-20">
@@ -344,7 +347,7 @@
                 <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
                     <h2 class="text-2xl md:text-3xl font-bold">Lacak Pakaian Anda (Live Status)</h2>
                     <p class="text-blue-100 mt-2 text-sm">Masukkan Nomor Kertas Tempel / Nota Anda yang diberikan oleh kasir.</p>
-                    <div class="mt-6 max-w-md mx-auto flex gap-2 bg-white p-2 rounded-2xl shadow-md">
+                    <div class="mt-6 max-w-md mx-auto flex gap-2 bg-white p-2 rounded-2xl shadow-md" data-aos="zoom-in">
                         <input type="number" id="search-nota-input" placeholder="Masukkan Angka Nota (Contoh: 1)" class="w-full px-4 py-2 text-slate-800 focus:outline-none text-sm">
                         <button onclick="lacakNotaPelanggan()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-6 py-2 rounded-xl transition text-sm whitespace-nowrap">
                             Cek Status
@@ -373,23 +376,30 @@
             </section>
 
             <section id="layanan-section" class="max-w-7xl mx-auto px-6 py-16">
-                <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom" data-aos-duration="1000">
                     <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">Daftar Menu</span>
                     <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Layanan Binatu Spesialis & Harga</h2>
                     <p class="text-sm text-slate-500 mt-2">Kami menawarkan harga transparan dengan kualitas pengerjaan terbaik di kelasnya.</p>
                 </div>
                 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition overflow-hidden">
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition overflow-hidden" data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
                         <img src="loundry.jpg" alt="Cuci Setrika Reguler" class="w-full h-40 object-cover">
                         <div class="p-6">
-                            <div class="text-2xl mb-1"><img src="logo.jpeg" alt="" style="width:20px;" height="20px"></div>
+                            <div class="text-2xl mb-1">
+                                <img src="logo.jpeg" alt="" style="width:20px;" height="20px"></div>
                             <h3 class="font-bold text-slate-900 text-lg">Cuci Setrika Reguler</h3>
                             <p class="text-slate-500 text-xs mt-1 mb-4">Cuci, kering, lipat harian higienis, bersih dan wangi semerbak.</p>
                             <div class="text-blue-600 font-extrabold text-lg">Rp 7.000 / kg</div>
                         </div>
                     </div>
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition overflow-hidden">
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition overflow-hidden" data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
                         <img src="loundry2.jpg" alt="Express 6 Jam" class="w-full h-40 object-cover">
                         <div class="p-6">
                             <div class="text-2xl mb-1"><img src="logo.jpeg" alt="" style="width:20px;" height="20px"></div>
@@ -398,7 +408,10 @@
                             <div class="text-blue-600 font-extrabold text-lg">Rp 15.000 / kg</div>
                         </div>
                     </div>
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition overflow-hidden">
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition overflow-hidden" data-aos="fade-left"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
                         <img src="loundry3.jpg" alt="Deep Clean Sepatu" class="w-full h-40 object-cover">
                         <div class="p-6">
                           <div class="text-2xl mb-1"><img src="logo.jpeg" alt="" style="width:20px;" height="20px"></div>
@@ -407,7 +420,10 @@
                             <div class="text-blue-600 font-extrabold text-lg">Rp 35.000 / pasang</div>
                         </div>
                     </div>
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition overflow-hidden">
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition overflow-hidden" data-aos="fade-left"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
                         <img src="loundry2.jpg" alt="Bed Cover" class="w-full h-40 object-cover">
                         <div class="p-6">
                             <div class="text-2xl mb-1"><img src="logo.jpeg" alt="" style="width:20px;" height="20px"></div>
@@ -418,37 +434,43 @@
                     </div>
                 </div>
                 
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 max-w-3xl mx-auto overflow-hidden mb-8">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 max-w-3xl mx-auto overflow-hidden mb-8" data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom" data-aos-duration="1000">
                     <img src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?q=80&w=800&auto=format&fit=cover" alt="Banner Ketentuan Layanan" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h4 class="font-bold text-slate-800 text-base mb-4 flex items-center gap-2">📋 Ketentuan & Syarat Layanan Pemesanan</h4>
                         <ul class="text-xs text-slate-600 space-y-2">
-                            <li>• Minimal pencucian kiloan adalah sebesar 3 kg per nota transaksi.</li>
-                            <li>• Pembayaran dapat dilakukan tunai atau nontunai via QRIS bank/e-wallet resmi toko saat baju selesai/diantar.</li>
-                            <li>• Layanan Antar-Jemput Gratis berlaku khusus untuk radius jangkauan maksimal 5 KM dari lokasi workshop utama.</li>
-                            <li>• Setiap orderan dilengkapi asuransi jaminan ganti rugi jika terjadi kehilangan fatal akibat kelalaian sistem operasional.</li>
+                            <li data-aos="fade-right" data-aos-duration="1000">• Minimal pencucian kiloan adalah sebesar 3 kg per nota transaksi.</li>
+                            <li data-aos="fade-right" data-aos-duration="1200">• Pembayaran dapat dilakukan tunai atau nontunai via QRIS bank/e-wallet resmi toko saat baju selesai/diantar.</li>
+                            <li data-aos="fade-right" data-aos-duration="1400">• Layanan Antar-Jemput Gratis berlaku khusus untuk radius jangkauan maksimal 5 KM dari lokasi workshop utama.</li>
+                            <li data-aos="fade-right" data-aos-duration="1600">• Setiap orderan dilengkapi asuransi jaminan ganti rugi jika terjadi kehilangan fatal akibat kelalaian sistem operasional.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-6 max-w-3xl mx-auto shadow-sm">
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl">🗓️</span>
+                        <span class="text-2xl" data-aos="fade-right"  data-aos-duration="1100">🗓️</span>
                         <div>
-                            <h4 class="font-bold text-slate-900 text-base">Jam Operasional & Jadwal Toko (Realtime)</h4>
-                            <p class="text-slate-500 text-xs">Pantau jadwal aktif buka toko kami agar penjemputan cucian Anda terjadwal sempurna.</p>
+                            <h4 class="font-bold text-slate-900 text-base" data-aos="fade-down"
+     data-aos-duration="1000">Jam Operasional & Jadwal Toko (Realtime)</h4>
+                            <p class="text-slate-500 text-xs" data-aos="fade-down"
+     data-aos-duration="1000">Pantau jadwal aktif buka toko kami agar penjemputan cucian Anda terjadwal sempurna.</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 gap-4 text-center mt-2">
-                        <div class="bg-white p-3 rounded-xl border border-blue-200 shadow-xs">
+                        <div class="bg-white p-3 rounded-xl border border-blue-200 shadow-xs" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
                             <span class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider">Senin - Jumat</span>
                             <span id="public-jadwal-weekday" class="block text-sm font-extrabold text-blue-700 mt-1">07:00 - 21:00</span>
                         </div>
-                        <div class="bg-white p-3 rounded-xl border border-blue-200 shadow-xs">
+                        <div class="bg-white p-3 rounded-xl border border-blue-200 shadow-xs" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
                             <span class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider">Hari Sabtu</span>
                             <span id="public-jadwal-sabtu" class="block text-sm font-extrabold text-blue-700 mt-1">06:00 - 22:00</span>
                         </div>
-                        <div class="bg-white p-3 rounded-xl border border-blue-200 shadow-xs">
+                        <div class="bg-white p-3 rounded-xl border border-blue-200 shadow-xs" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
                             <span class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider">Hari Minggu</span>
                             <span id="public-jadwal-minggu" class="block text-sm font-extrabold text-amber-600 mt-1">06:00 - 22:00</span>
                         </div>
@@ -459,30 +481,30 @@
 
         <div class="parallax-layer z-30">
             <section id="tentang-section" class="max-w-7xl mx-auto px-6 py-16">
-                <div class="text-center max-w-2xl mx-auto mb-16">
+                <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-down">
                     <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">Mengenal Kami</span>
                     <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Karyawan Profesional & Armada Mesin Kami</h2>
                     <p class="text-sm text-slate-500 mt-2">Dibalik pakaian wangi and bersih Anda, ada teknologi andalan dan tim kerja yang berdedikasi tinggi.</p>
                 </div>
 
                 <div class="mb-16">
-                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">⚙️ Standar Peralatan & Mesin Cuci Industrial</h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2" data-aos="fade-right">⚙️ Standar Peralatan & Mesin Cuci Industrial</h3>
                     <div class="grid md:grid-cols-3 gap-8">
-                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100" data-aos="flip-down">
                             <img src="loundry.jpg" alt="Mesin Cuci Otomatis" class="w-full h-48 object-cover">
                             <div class="p-5">
                                 <h4 class="font-bold text-slate-900 text-base">Mesin Cuci Front-Load Berkecepatan Tinggi</h4>
                                 <p class="text-xs text-slate-500 mt-2">Menggunakan putaran rotasi pintar yang dapat disesuaikan otomatis dengan kelembutan jenis serat kain agar baju kesayangan tidak melar.</p>
                             </div>
                         </div>
-                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100" data-aos="flip-down">
                             <img src="loundry3.jpg" alt="Mesin Pengering" class="w-full h-48 object-cover">
                             <div class="p-5">
                                 <h4 class="font-bold text-slate-900 text-base">Unit Pengeringan (Dryer Max Room)</h4>
                                 <p class="text-xs text-slate-500 mt-2">Pakaian kering 100% bebas dari bau apek lembap meskipun kondisi luar sedang hujan lebat, menjaga kebersihan bebas bakteri kontaminan.</p>
                             </div>
                         </div>
-                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100" data-aos="flip-down">
                             <img src="loundry2.jpg" alt="Setrika Uap" class="w-full h-48 object-cover">
                             <div class="p-5">
                                 <h4 class="font-bold text-slate-900 text-base">Setrika Boiler Uap Geser</h4>
@@ -493,27 +515,27 @@
                 </div>
 
                 <div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">👥 Tim Eksekutif & Karyawan Profesional</h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2"  data-aos="fade-right"  data-aos-duration="1100">👥 Tim Eksekutif & Karyawan Profesional</h3>
                     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div class="bg-white p-5 rounded-2xl text-center shadow-sm border border-slate-100">
+                        <div class="bg-white p-5 rounded-2xl text-center shadow-sm border border-slate-100" data-aos="zoom-out-up">
                             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300" alt="Tim Operasional" class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500 p-1">
                             <h4 class="font-bold text-slate-900 text-sm mt-4">Siti Aminah</h4>
                             <span class="text-[11px] bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-full font-bold inline-block mt-1">Quality Control</span>
                             <p class="text-[11px] text-slate-500 mt-3">Memastikan pemilahan jenis bahan kain tepat dan pengepakan lipatan parfum berjalan higienis menggunakan standar sarung tangan medis.</p>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl text-center shadow-sm border border-slate-100">
+                        <div class="bg-white p-5 rounded-2xl text-center shadow-sm border border-slate-100" data-aos="zoom-out-up">
                             <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300" alt="Tim Kurir" class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500 p-1">
                             <h4 class="font-bold text-slate-900 text-sm mt-4">Rian Hidayat</h4>
                             <span class="text-[11px] bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-full font-bold inline-block mt-1">Armada Antar-Jemput</span>
                             <p class="text-[11px] text-slate-500 mt-3">Kurir andalan yang siap menjemput baju kotor langsung ke depan pintu gerbang rumah Anda wilayah Bekasi tepat waktu.</p>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl text-center shadow-sm border border-slate-100">
+                        <div class="bg-white p-5 rounded-2xl text-center shadow-sm border border-slate-100" data-aos="zoom-out-up">
                             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300" alt="Tim Kasir" class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500 p-1">
                             <h4 class="font-bold text-slate-900 text-sm mt-4">Dewi Lestari</h4>
                             <span class="text-[11px] bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-full font-bold inline-block mt-1">Manajer Front Office</span>
                             <p class="text-[11px] text-slate-500 mt-3">Melayani pendaftaran nota, penimbangan timbangan digital akurat, serta memandu aktivasi QRIS transaksi orderan Anda.</p>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl text-center shadow-sm border border-slate-100">
+                        <div class="bg-white p-5 rounded-2xl text-center shadow-sm border border-slate-100" data-aos="zoom-out-up">
                             <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=300" alt="Tim Detailer" class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500 p-1">
                             <h4 class="font-bold text-slate-900 text-sm mt-4">Budi Prasetyo</h4>
                             <span class="text-[11px] bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-full font-bold inline-block mt-1">Teknisi Cuci Sepatu</span>
@@ -524,39 +546,39 @@
             </section>
 
             <section id="testimoni-section" class="max-w-7xl mx-auto px-6 py-16">
-                <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="text-center max-w-2xl mx-auto mb-12" data-aos="zoom-out-up">
                     <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">Ulasan Kepuasan</span>
                     <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Apa Kata Pelanggan Setia Kami?</h2>
                     <p class="text-sm text-slate-500 mt-2">Pendapat jujur dari mereka yang telah mempercayakan kebersihan pakaiannya kepada kami.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative">
-                        <p class="text-slate-600 text-sm italic">"Sangat terbantu dengan layanan Express 6 jam nya Admin Laundry. Pas ada acara mendadak, baju langsung siap, wangi and rapi banget!"</p>
+                        <p class="text-slate-600 text-sm italic" data-aos="zoom-out-up">"Sangat terbantu dengan layanan Express 6 jam nya Admin Laundry. Pas ada acara mendadak, baju langsung siap, wangi and rapi banget!"</p>
                         <div class="flex items-center gap-3 mt-6">
                             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150" alt="Client 1" class="w-10 h-10 rounded-full object-cover">
-                            <div>
+                            <div data-aos="zoom-out-up">
                                 <h4 class="font-bold text-slate-900 text-xs">Anisa Rahma</h4>
-                                <span class="text-[10px] text-amber-500">⭐⭐⭐⭐⭐ Pelanggan Rumah Tangga</span>
+                                <span class="text-[10px] text-amber-500" data-aos="zoom-out-up">⭐⭐⭐⭐⭐ Pelanggan Rumah Tangga</span>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative">
-                        <p class="text-slate-600 text-sm italic">"Gratis antar jemputnya beneran amanah and tepat waktu wilayah Bekasi Jaka Setia. Gak perlu ribet keluar rumah lagi kalau cucian menumpuk."</p>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative" data-aos="zoom-out-up">
+                        <p class="text-slate-600 text-sm italic" data-aos="zoom-out-up">"Gratis antar jemputnya beneran amanah and tepat waktu wilayah Bekasi Jaka Setia. Gak perlu ribet keluar rumah lagi kalau cucian menumpuk."</p>
                         <div class="flex items-center gap-3 mt-6">
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150" alt="Client 2" class="w-10 h-10 rounded-full object-cover">
-                            <div>
+                            <div data-aos="zoom-out-up">
                                 <h4 class="font-bold text-slate-900 text-xs">Bambang H.</h4>
-                                <span class="text-[10px] text-amber-500">⭐⭐⭐⭐⭐ Karyawan Swasta</span>
+                                <span class="text-[10px] text-amber-500" data-aos="zoom-out-up">⭐⭐⭐⭐⭐ Karyawan Swasta</span>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative">
-                        <p class="text-slate-600 text-sm italic">"Sepatu sneakers saya yang tadinya kotor banyak noda tanah langsung dibersihkan kaya baru lagi. Teknisi cuci sepatunya juara!"</p>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative" data-aos="zoom-out-up">
+                        <p class="text-slate-600 text-sm italic" data-aos="zoom-out-up">"Sepatu sneakers saya yang tadinya kotor banyak noda tanah langsung dibersihkan kaya baru lagi. Teknisi cuci sepatunya juara!"</p>
                         <div class="flex items-center gap-3 mt-6">
                             <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150" alt="Client 3" class="w-10 h-10 rounded-full object-cover">
-                            <div>
+                            <div data-aos="zoom-out-up">
                                 <h4 class="font-bold text-slate-900 text-xs">Citra Lestari</h4>
-                                <span class="text-[10px] text-amber-500">⭐⭐⭐⭐⭐ Mahasiswi</span>
+                                <span class="text-[10px] text-amber-500" data-aos="zoom-out-up">⭐⭐⭐⭐⭐ Mahasiswi</span>
                             </div>
                         </div>
                     </div>
@@ -564,7 +586,8 @@
             </section>
 
             <section id="maps-section" class="max-w-7xl mx-auto px-6 pb-16">
-                <div class="w-full bg-gradient-to-tr from-blue-600 to-indigo-700 rounded-3xl shadow-2xl flex flex-col justify-between text-white p-6 md:p-8 text-center">
+                <div class="w-full bg-gradient-to-tr from-blue-600 to-indigo-700 rounded-3xl shadow-2xl flex flex-col justify-between text-white p-6 md:p-8 text-center" data-aos="fade-up"
+     data-aos-duration="1000">
                     <div class="mb-4">
                         <h3 class="text-2xl font-bold md:text-3xl">Informasi lokasi alamat</h3>
                         <p class="text-blue-50 mt-1 text-sm md:text-base">Jl. depok 2026 admin loundry</p>
@@ -1488,5 +1511,9 @@
             if (e.ctrlKey && e.keyCode === 85) { e.preventDefault(); }
         });
     </script>
+      <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 </html>
